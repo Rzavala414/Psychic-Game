@@ -98,20 +98,34 @@ let guessMadeText = document.getElementById("guess_made_text");
 //makes the computer choose a random letter
 let computerGuess = letters[Math.floor(Math.random() * letters.length)];
 
-console.log (computerGuess)
+console.log(computerGuess)
 
 // collects user input for what character is pressed
 document.onkeyup = function (event) {
     var userGuess = event.key;
     console.log(userGuess)
 
-}
- // TODO: check if user guess correctly add a point to wins counter. restart game when either of the above statements is true
-       if(userGuess === computerGuess){
-            wins++;
-      }
- // TODO:check if the computer and user chose the same character. if user guess wrong all nine times add a point for losses counter
-      else{
-            guessesLeft--;
+    //check if user guess correctly add a point to wins counter. restart game when either of the above statements is true
+    if (userGuess === computerGuess) {
+        wins++;
+        guessedLetters = []
+        guessesLeft = 9;
+    }
+    //check if the computer and user chose the same character. if user guess wrong all nine times add a point for losses counter
+    else {
+        guessesLeft--;
 
-       }
+    }
+    //checks if guesses is 0 and takes away a guess 
+    if (guessesLeft === 0) {
+        losses++;
+        guessedLetters = [];
+        guessesLeft = 9;
+
+    }
+
+    //guessMadeText.textContent = guessedLetters;
+    guessesLeft.textContent = guessesLeftText;
+    winsText.textContent = wins;
+    lossesText.texContent = losses;
+}
